@@ -1,0 +1,63 @@
+prompt templates
+chat models
+
+LearnSmith , a tracing platform for the llm applciations
+    * we login to langSmith and paste the variables in .env, one we paste them, whenever we run the code the langsmith will trace out runs and gives the stats
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Chat model -
+------------
+When you use  chat model , you can either just give the prompt or you can give multi user conversation
+Ex: when invoking a model
+
+llm = ChatOllama(model="gemma3:270m")
+prompt = " Hi "
+response1 = model.invoke("Hello")
+response2 = model.invoke(prompt)
+response3 = model.invoke(
+    [
+        ("system", "You are a helpful assistant."),
+        ("human", "What is AI?"),
+        ("ai", "AI is artificial intelligence."),
+        ("human", "Give an example.")
+    ]
+)
+
+response3 helps  the model to understand the conversation history.
+The system message guides the model's behavior. Ex: ("system", "Explain like I'm 10 years old.") , ("system", "You are a Python tutor.")
+[
+    ("human", "My name is John"),
+    ("ai", "Nice to meet you John"),
+    ("human", "What's my name?")
+]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Chain -
+-------
+A chain combines multiple components into a pipeline.
+    chain = prompt_template | llm
+    chain = retriever | prompt | llm
+
+Instead of:
+    prompt = f"Explain {topic}"
+    response = llm.invoke(prompt)
+you define:
+    prompt = PromptTemplate(
+        template="Explain {topic}",
+        input_variables=["topic"]
+    )
+chain.invoke({
+    "topic": "machine learning"
+})
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AI agent vs chain
+
+In AI agent, LLM decides what is the next step to be taken
+
+IN Chain we determine the flow and the flow will cannot be alterebed by its own
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ReAct Agent arch
+
+Reasoning and Acting
