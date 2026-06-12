@@ -69,8 +69,77 @@ Tavily is used to give the llm the capability of web search build for AI agents,
 the result gives an api response so that the llm can get the data and respond to the user query.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Pydant: -
+-------
+Pydantic is a Python library used for data validation, parsing, and type enforcement.
+Think of it as a way to ensure that incoming data has the correct structure and types.
+
+Without Pydantic
+----------------
+    user = {
+        "name": "John",
+        "age": "25"
+    }
+Here, age is a string. You have to manually check and convert it.
+
+With Pydantic
+--------------
+from pydantic import BaseModel
+class User(BaseModel):
+    name: str
+    age: int
+user = User(name="John", age="25")
+print(user)
+
+Output:
+name='John' age=25
+
+Pydantic automatically converts "25" to 25.
+
+Validation
+from pydantic import BaseModel
+class User(BaseModel):
+    age: int
+User(age="abc")
+
+Output:
+ValidationError:
+age
+  Input should be a valid integer
+
+Why is it used in LangChain?
+------------------------------
+When creating tools, you can define exactly what inputs the tool accepts.
+
+from pydantic import BaseModel, Field
+
+class SearchInput(BaseModel):
+    query: str = Field(description="Search query")
+
+@tool(args_schema=SearchInput)
+def search(query: str):
+    return "results"
+
+Benefits:
+
+Input validation
+Better tool descriptions
+Helps the LLM understand the expected arguments
+Prevents invalid tool calls
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Structured Output: -
+--------------------
+Tool stratergy and provider stratergy
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Note: -
 -------
 # ollama  models = [ "gemma3:270m" ,  "qwen3:0.6b" ] 
 # "gemma3:270m" -> this model doesnot support tools decorator hence qwen3:0.6b is being used for this function
+# Ollama models does not support structured response 
+using groq and it is supporting the structured_response
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------

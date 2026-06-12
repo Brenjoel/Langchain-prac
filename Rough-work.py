@@ -62,3 +62,58 @@ Musk's political activities, statements and views have made him a polarizing fig
     # response = model.generate_content("Hello")
 
     # print(response.text)
+
+def test2():
+
+    print("Hello from langchain-Project!")
+    model = "qwen3:8b"
+    model2="llama3.1:8b"
+    llm = ChatOllama(model=model)  # qwen3:8b
+    tools = [TavilySearch()]
+    agent = create_agent(model=llm , tools = tools, response_format=AgentResponse)
+    # content = "Search for 3 job postings for AI engineer using langchain in Hyderabad on linkedin and list their details"
+    content = "What is langchain, explain with exxample"
+    result = agent.invoke({"messages": HumanMessage(content=content)})
+    # print(result)
+    # print("Done")
+    # print(result.keys())
+
+    response = agent.invoke(
+    {
+        "messages": [
+            {
+                "role": "user",
+                "content": "What is Python?"
+            }
+        ]
+    }
+)
+
+    print(response["messages"][-1].content)
+    print(result)
+    print(type(result))
+
+def various_llms():
+    
+    print("Hello from langchain-Project!")
+    # model_groq="llama-3.3-70b-versatile"
+    model_gemini="gemini-2.5-flash" # "gemini-2.0-flash"
+    model_gemini2="gemini-2.5-flash-preview"
+    model= "qwen3:8b"
+    model2="llama3.1:8b"
+    # llm = ChatGroq(model=model_gemini)
+    # llm = ChatGoogleGenerativeAI(model=model_gemini)
+    llm = ChatOllama(model=model)  # qwen3:8b
+    tools = [TavilySearch()]
+    agent = create_agent(model=llm , tools = tools, response_format=AgentResponse)
+    content = "Search for 3 job postings for AI engineer using langchain in Hyderabad on linkedin and list their details"
+    # content = "What is the temperature in tokyo"
+    result = agent.invoke({"messages": HumanMessage(content=content)})
+    print('-------------------------------------------------------------------------'*2 +'\n\n')
+    print(result)
+    print('-------------------------------------------------------------------------'*2 +'\n\n')
+    print(type(result))
+    # for i, msg in enumerate(result["messages"]):
+    #     print(f"\n--- Message {i} ---")
+    #     print(type(msg))
+    #     print(msg)
