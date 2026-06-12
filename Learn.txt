@@ -69,4 +69,8 @@ Tavily is used to give the llm the capability of web search build for AI agents,
 the result gives an api response so that the llm can get the data and respond to the user query.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+Note: -
+-------
+# ollama  models = [ "gemma3:270m" ,  "qwen3:0.6b" ] 
+# "gemma3:270m" -> this model doesnot support tools decorator hence qwen3:0.6b is being used for this function
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
