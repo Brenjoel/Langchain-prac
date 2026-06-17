@@ -74,6 +74,17 @@ Observation  Action
          +-----------+
          |   Tool    |
          +-----------+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ReAct Prompt -
+---------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Layer 0 -
+---------
+11m = ChatOpenAI(model="gpt-5")
+tools = [TavilySearch()]
+agent = create_agent(model=1lm, tools=tools)
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Layer 1 -
 ---------
@@ -81,7 +92,41 @@ Agent Loop + Function Calling. (LangChain)
 
 @tool, bind_tools(), init_chat_model(), ToolMessage
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Layer 2 -
+---------
+Agent Loop + Function Calling (RAW)
 
+Hand-written JSON schemas, ollama.chat()
+
+the json formats for various models can be found in the respective documentations
+
+Ex: For ollama https://docs.ollama.com/capabilities/tool-calling#curl
+Either JSON format can be used for tool definition or python definition format as google docstring format as give in the documentation
+
+you can also refer the function definition, go to definition of ollama -> client.chat -> there you will find the tool and
+respective docstring explaining the details of the format
+
+# NOTE: Ollama can also auto-generate these schemas if you pass the functions
+# directly as tools (similar to LangChain's @tool decorator):
+#   tools_for_llm = [get_product_price, apply_discount]
+# However, this requires your docstrings to follow the Google docstring format
+# so Ollama can parse parameter descriptions from the Args section. For example:
+#   def get_product_price(product: str) -> float:
+#       """Look up the price of a product in the catalog.
+#
+#       Args:
+#           product: The product name, e.g. 'laptop', 'headphones', 'keyboard'.
+#
+#       Returns:
+#           The price of the product, or 0 if not found.
+#       """
+# We keep the manual JSON version here so you can see what @tool hides from you.
+
+# --- Helper: traced Ollama call ---
+# Difference 3: Without LangChain, we must manually trace LLM calls for LangSmith.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Reasoning and Acting
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 tavily -
