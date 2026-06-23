@@ -88,7 +88,8 @@ def create_retrieval_chain_with_lcel():
 
     """
     retrieval_chain = (
-        RunnablePassthrough.assign(context = itemgetter('question') | retriever | format_docs)
+        # RunnablePassthrough.assign(context = itemgetter('question') | retriever | format_docs)
+        RunnablePassthrough.assign(context = {"question ": "What is machinelearning" }| retriever | format_docs)
     | prompt_template
     | llm
     | StrOutputParser()

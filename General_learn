@@ -1,0 +1,21 @@
+Asyncio = one thread managing many waiting tasks.
+Multithreading = multiple threads in one process sharing memory.
+Multiprocessing = multiple independent Python processes using multiple CPU cores.
+
+Which One Should You Use?
+Calling APIs / LLMs
+
+✅ Asyncio
+
+await llm.ainvoke(...)
+Downloading Files
+
+✅ Asyncio or Threads
+
+Training ML Models
+
+✅ Multiprocessing
+
+Image Processing
+
+✅ Multiprocessing

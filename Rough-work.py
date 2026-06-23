@@ -6,6 +6,7 @@ from langchain_tavily import TavilySearch
 
 from main import AgentResponse
 
+from operator import itemgetter
 
 def test():
     information = """
@@ -71,7 +72,7 @@ Musk's political activities, statements and views have made him a polarizing fig
 
     # print(response.text)
 
-def test2():
+def test2():    
 
     print("Hello from langchain-Project!")
     model = "qwen3:8b"
@@ -148,3 +149,11 @@ def prompt():
             )
         ),
     ]
+
+def item_getter():
+    d={"q":17,'w':23}
+    a = itemgetter('q','w')
+    print(d['q'])
+    print(a(d))
+
+item_getter()

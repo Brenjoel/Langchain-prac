@@ -48,4 +48,17 @@ by default the outputs from format_docs  (context and query)  are not sent to th
 
 prompt_template needs question and context 
 
+----------------------------------------------------------------------------------------------------------------------------------------------
+Pinecone vector store indexes the documents over cloud,
+if need to index locally then Chroma helps
+from langchain_chroma import Chroma
 
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+import ssl 
+this helps for transprt layer security.
+When data is passed through api the the data trasfered is encrypted and only the destination files can decrypt the data sent
+
+import certifi
+certifi is a Python package that provides a collection of trusted SSL/TLS root certificates.
+certifi tells Python which certificate issuers it should trust.
