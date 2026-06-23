@@ -1,0 +1,100 @@
+SSL certificate is used as tavily make multiple searches and it needs the certificate 
+----------------------------------------------------------------------------------------------------------------------------------------------
+Rate Limiting
+while embedding, multple documents are passed and the number of tokens passed has a limit.
+The limit depends on the model being used.
+
+For production grade applications rate limiting is needed.
+
+retry_min_seconds
+If any request fails then it will retry after some time.
+This helps in handling failed requests
+----------------------------------------------------------------------------------------------------------------------------------------------
+Chunk size is different for text splitter and embedding models
+for text splitter : the text is splitter per chunk size
+ex: a document of 1000 lines and chunk size is 100 then it is split into 10 chunks
+
+for embeddings:
+the chunk size here means How many chunks are embedded in one batch request.
+ex: you got 10 chunks in the previous text splitter, now if you mention chunk size as 2 here,
+then for every batch request sent 2 chunks will be sent
+----------------------------------------------------------------------------------------------------------------------------------------------
+LLM chunking stratergies:
+1. Fixed size chunking
+2. Sliding window approach
+3. Recursive splitting
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Note: 
+Although the current models process lots of tokens we still need RAG models and chunking mechanisms
+because
+1. Passing lot of data increases the number of tokens and hence it becomes very expensive
+2. Also RAG reduces unwanted noises
+3. The data retrieved stays more relavent
+4. We can trace back the origins of the result 
+----------------------------------------------------------------------------------------------------------------------------------------------
+tavily_extract = TavilyExtract()
+tavily_map = TavilyMap(max_depth = 5, max_breadth = 20 , max_pages = 1000)
+
+1.TavilyExtract
+---------------------
+Given a URL, extract the actual content from that page.
+URL ↓ Download page ↓Extract clean text ↓Return content
+result = tavily_extract.invoke({
+    "urls": ["https://example.com"]
+})
+
+2. TavilyMap
+----------------
+Crawl a website and discover pages/links.
+Example website:
+
+company.com
+├── about
+├── products
+│   ├── laptop
+│   └── keyboard
+├── careers
+└── contact
+
+TavilyMap starts from:
+company.com
+and follows links.
+
+
+max_depth=5
+....................
+Controls:
+
+How many levels deep the crawler can go.
+
+Example:
+
+Level 0:
+company.com
+
+Level 1:
+company.com/products
+
+Level 2:
+company.com/products/laptop
+
+max_breadth=20
+...................
+Controls:
+
+How many links per page can be followed.
+
+Suppose homepage contains:
+100 links
+
+With:
+max_breadth=20
+the crawler only follows up to 20 links from that page.
+
+max_pages=1000
+...............
+Controls:
+
+Total number of pages allowed during the crawl.

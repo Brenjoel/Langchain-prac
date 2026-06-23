@@ -156,4 +156,7 @@ def item_getter():
     print(d['q'])
     print(a(d))
 
-item_getter()
+# item_getter()s
+from langchain_ollama import OllamaEmbeddings
+
+print(OllamaEmbeddings.model_fields.keys())

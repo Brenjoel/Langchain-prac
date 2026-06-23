@@ -1,0 +1,16 @@
+GOOGLE_API_KEY 
+
+LANGSMITH_TRACING=true
+LANGSMITH_ENDPOINT=https://apac.api.smith.langchain.com
+LANGSMITH_API_KEY=
+LANGSMITH_PROJECT="Doc helper"
+TAVILY_API_KEY = 
+
+LANGCAHIN_PROJECT = Document Helper
+
+GROQ_API_KEY = 
+# ANTHROPIC_API_KEY=<your-anthropic-api-key>
+
+PINECONE_API_KEY=
+INDEX_NAME =langchain-docs
+ # Index from pinecone
