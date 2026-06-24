@@ -6,12 +6,33 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_ollama import OllamaLLM , ChatOllama
 
 
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_core.messages import HumanMessage
+from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM , ChatOllama
+from tavily import TavilyClient
+from langchain_tavily import TavilySearch
+
+
+from pydantic import BaseModel , Field
+from typing import List
+
+from langchain_groq import ChatGroq
+
 import os
-
-
 
 load_dotenv()
 
+class Source(BaseModel):
+    """Schema for a source used by the agent"""
+    url:str = Field(description="The url of the source")
+
+class AgentResponse(BaseModel):
+    """Schema for agent response with answer and sources"""
+
+    answer:str = Field(description="The agent's answer to the query")
+    sources: List[Source] = Field(default_factory=list, description="List of sources used to generate the answer  ")
 
 def set_env_variables(var_name , var_value):
     """
@@ -64,17 +85,52 @@ def HelloWorldLangChain():
     #     google_api_key = os.environ.get("GOOGLE_API_KEY")
     # )
     
+
+@tool
+def search(query:str)   -> str:
+    """
+    Tool that searches over the internet
+    Args:
+        query: The query to search for 
+    Return:
+        The search resutl
+    """
+    print(f"searching for {query}")
+    tavily_client = TavilyClient()
+    response = tavily_client.search(query=query)
+    return response
+
+def tavily_tool():
+    llm = ChatOllama(model="qwen3:0.6b") 
+    tools = [search]
+    agent = create_agent(model=llm , tools = tools)
+    content = "Search for 3 job postings for AI engineer using langchain in Hyderabad on linkedin and list their details"
+    result = agent.invoke({"messages": HumanMessage(content=content)})
+    print(result)
+
+class Person(BaseModel):
+    name: str
+    age: int
+    
 def main():
     print("Hello from langchain-Project!")
-    
-    
-    
-    
+    # model_groq="llama-3.3-70b-versatile"
+    model_gemini="gemini-2.5-flash" # "gemini-2.0-flash"
+    model_gemini2="gemini-2.5-flash-preview"
+    model= "qwen3:8b"
+    model2="llama3.1:8b"
+    # llm = ChatGroq(model=model_gemini)
+    llm = ChatGoogleGenerativeAI(model=model_gemini)
+    # llm = ChatOllama(model=model)  # qwen3:8b
+    tools = [TavilySearch()]
+    agent = create_agent(model=llm , tools = tools, response_format=AgentResponse)
+    content = "Search for 3 job postings for AI engineer using langchain in Hyderabad on linkedin and list their details"
 
+    result = agent.invoke({"messages": HumanMessage(content=content)})
+    print('-------------------------------------------------------------------------'*2 +'\n\n')
+    print(result)
+    print('-------------------------------------------------------------------------'*2 +'\n\n')
+    print(type(result))
     
-
-    
-    
-
 if __name__ == "__main__":
     main()
