@@ -1,3 +1,5 @@
+*tasks unpacks iterables ex: m = [1,2,3] print(*m) o/p = 1 2 
+-----------------------------------------------------------------------------------------
 Asyncio = one thread managing many waiting tasks.
 Multithreading = multiple threads in one process sharing memory.
 Multiprocessing = multiple independent Python processes using multiple CPU cores.

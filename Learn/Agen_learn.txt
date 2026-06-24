@@ -34,6 +34,21 @@ because
 3. The data retrieved stays more relavent
 4. We can trace back the origins of the result 
 ----------------------------------------------------------------------------------------------------------------------------------------------
+Why "Recursive" Character Splitter?
+
+Instead of blindly cutting at character 1000:
+
+The capital of Fr | ance is Paris
+
+it tries to split intelligently using:
+
+Paragraphs (\n\n)
+Lines (\n)
+Spaces ( )
+Characters
+
+in that order.
+----------------------------------------------------------------------------------------------------------------------------------------------
 tavily_extract = TavilyExtract()
 tavily_map = TavilyMap(max_depth = 5, max_breadth = 20 , max_pages = 1000)
 
