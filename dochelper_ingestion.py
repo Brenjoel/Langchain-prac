@@ -8,7 +8,7 @@ import certifi
 from dotenv import load_dotenv
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-# from langchain_chroma import Chroma
+from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_ollama import OllamaEmbeddings
 from langchain_pinecone import PineconeVectorStore
@@ -31,8 +31,8 @@ embeddings = OllamaEmbeddings(
 )
 # For openAI models you can use the following parameters , chunk_size = 50, retry_min_seconds=10, show_progress_bar= True
 
-# chroma = Chroma(persist_directly = "chroma_db" , embedding_function= embeddings)
-vector_store = PineconeVectorStore(index_name=os.environ["INDEX_NAME"], embedding=embeddings)
+vector_store = Chroma(persist_directory = "chroma_db" , embedding_function= embeddings)
+# vector_store = PineconeVectorStore(index_name=os.environ["INDEX_NAME"], embedding=embeddings)
 tavily_extract = TavilyExtract()
 tavily_map = TavilyMap(max_depth = 5, max_breadth = 20 , max_pages = 1000)
 tavily_crawl = TavilyCrawl()
@@ -67,10 +67,21 @@ async def index_documents_async(documents : List[Document], batch_size: int = 50
         return True
     
     #  Process batches concurrently
+    
+    # tasks = [
+    # add_batch(batch, i+1)
+    # for i, batch in enumerate(batches[:])
+    # ]
+
+
+    # for i, batch in enumerate(batches):
+    #     await add_batch(batch, i+1)
+    
     tasks = [add_batch(batch,i+1) for i,batch in enumerate(batches) ]
     results = await  asyncio.gather(*tasks , return_exceptions=True)
     # *tasks unpacks iterables ex: m = [1,2,3] print(*m) o/p = 1 2 
     
+
     # Count successful batches
     successful = sum(1 for result in results if result is True)
 
@@ -82,6 +93,7 @@ async def index_documents_async(documents : List[Document], batch_size: int = 50
         log_warning(
             f"VectorStore Indexing: Processed {successful}/{len(batches)} batches successfully"
         )
+    
 
     print("Done")
 
@@ -124,13 +136,14 @@ async def main():
     )
 
     # Process documents asynchronously
-    await index_documents_async(splitted_docs,batch_size=500)
+    await index_documents_async(splitted_docs,batch_size=15)
 
     log_header("PIPELINE COMPLETE")
     log_success("🎉 Documentation ingestion pipeline finished successfully!")
     log_info("📊 Summary:", Colors.BOLD)
     log_info(f"   • Documents extracted: {len(all_docs)}")
-    log_info(f"   • Chunks created: {len(splitted_docs)}")
+    log_info(f"   • Chunks created: {len(splitted_docs)} ")
+    # (This number should match with the number in the change in reord count of pinecone) 
 
 if __name__ == "__main__":
     asyncio.run(main())

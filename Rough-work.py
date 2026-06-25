@@ -4,7 +4,7 @@ from langchain.messages import HumanMessage
 from langchain_ollama import ChatOllama
 from langchain_tavily import TavilySearch
 
-from main import AgentResponse
+from llm_main import AgentResponse
 
 from operator import itemgetter
 
