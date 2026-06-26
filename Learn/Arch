@@ -1,0 +1,39 @@
+1. Agent Loop LLM Tool calling
+    Tool definitions
+        Tool1
+        Tool2
+    Agent Loop
+        initialize llm (Ex: init-chat_ model)
+        bind the list of tools to the llm defined
+
+        loop the invokation of llm with tools by passing messages(System and human) 
+        until final answer is returned
+        
+        if the llm selects a tool, invoke the tool Selected with respective args received 
+        append the message returned from tool to messages
+
+2. Agent with function calling
+    function definitions
+        Func1
+        Func2
+    Now the functions are converted into tools by using the JSON format supported by the llm used
+
+    Agent Loop
+    same as previous
+
+3. RAW ReAct prompt
+    function definitions
+        Func1
+        Func2
+    
+    create a variable that store a list with each element having a sting describing tool name , signature and description 
+    prepare a ReAct prompt  (Ex: hwchase17/react )
+    and pass respective variables
+
+    initialize a llm to invoke
+    
+
+
+
+
+

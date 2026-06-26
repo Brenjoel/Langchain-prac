@@ -1,3 +1,17 @@
+Agentic RAG
+www.chatlangchain.com
+----------------------------------------------------------------------------------------------------------------------------------------------
+original_function = getattr(tool_function,"__wrapped__", tool_function)
+---------------------------------------------------------------------------------------------------------------------------------------------- 
+ollama.chat() vs ChatOllama
+
+This is a very important distinction. Think of it like driving a car directly vs. driving through an automatic driving assistant.
+
+ollama.chat() → Directly talks to the Ollama server.
+ChatOllama → A LangChain wrapper around ollama.chat() that makes it compatible with the LangChain ecosystem.
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
 SSL certificate is used as tavily make multiple searches and it needs the certificate 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 Rate Limiting

@@ -13,7 +13,10 @@ load_dotenv()
 
 # Initialize embeddings
 ollama_embeddings_model = "nomic-embed-text"
+# ollama_model = 'qwen3:0.6b'
 ollama_model = 'qwen3:8b'
+# ollama_model = 'gemma3:270m' # Does not support tools
+
 embeddings = OllamaEmbeddings(model = ollama_embeddings_model)
 
 # Initialize Vectore store
