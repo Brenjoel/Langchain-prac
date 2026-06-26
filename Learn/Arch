@@ -31,7 +31,18 @@
     and pass respective variables
 
     initialize a llm to invoke
-    
+
+    Loop
+        pass the prompt by adding scratchpad to the previous prompt
+        call the llm chat function and pass the required args
+            model , message ({role:role,content: fullprompt})
+            option {"stop":<when to stop>}
+                    (Ex: ['\nobservation] to stop at observation)
+
+        fetch final asnwer with the help of regex
+
+        
+       update scratchpad with output and observation 
 
 
 
