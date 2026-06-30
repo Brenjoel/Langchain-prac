@@ -40,6 +40,8 @@ flow engineering
 
 CAIR - confidence in AI Results
 
+-----------------------------------------------------------------------------------------
+uv init
 
 -----------------------------------------------------------------------------------------
 Asyncio = one thread managing many waiting tasks.
