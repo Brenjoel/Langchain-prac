@@ -2,8 +2,8 @@ import os
 import streamlit as st 
 from typing import Any, List, Dict
 
-from backend.core import run_llm
-import backend
+from doc_helper_backend.core import run_llm
+import doc_helper_backend
 def _format_sources(context_docs : List[Any]) -> List[str]:
     return [
         str((meta.get("source") or "Unknown"))
@@ -49,7 +49,7 @@ if prompt:
         try:
             with st.spinner("Retrieving docs and generating"):
                 result: Dict[str,Any] = run_llm(prompt)
-                answer =  backend.core.ollama_model + "\n" + str(result.get("answer","")).strip() or "(No answer returned)"
+                answer =  doc_helper_backend.core.ollama_model + "\n" + str(result.get("answer","")).strip() or "(No answer returned)"
                 sources = set(_format_sources(result.get("context",[])))
 
             st.markdown(answer)
