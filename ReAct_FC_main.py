@@ -16,7 +16,7 @@ def should_continue(state: MessagesState)-> str:
     if not state["messages"][LAST].tool_calls:
         return END 
     else:
-        print("Tool calls: ", state["messages"][LAST].tool_calls)
+        # print("Tool calls: ", state["messages"][LAST].tool_calls)
         return ACT
 
 flow = StateGraph(MessagesState)
@@ -33,4 +33,8 @@ app = flow.compile()
 app.get_graph().draw_mermaid_png(output_file_path="first_reAct_Flow.png")
 
 if __name__ == '__main__':
-    print("Hello ReAct LangGrapg with function calling")
+    # print("Hello ReAct LangGrapg with function calling")
+    query = "What is the temperature in hyderabad? display it and triple it "
+    print("working...")
+    res = app.invoke({"messages": [HumanMessage(content = query)]})
+    print(res["messages"][LAST].content)

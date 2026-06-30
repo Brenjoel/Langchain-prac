@@ -6,6 +6,9 @@ from ReAct_FC_react import llm, tools
 
 SYSTEM_MESSAGE = """
 You are a helpful assistant that can use tools to answer questions.
+Strictly use the tools whenever required
+- do not hallusinate
+- Analyse the tool you have and then act accordingly
 """
 
 def run_agent_reasoning(state: MessagesState) -> MessagesState:
@@ -16,5 +19,3 @@ def run_agent_reasoning(state: MessagesState) -> MessagesState:
     return {"messages": [response]}
 
 tool_node = ToolNode(tools)
-
-print(tools)
