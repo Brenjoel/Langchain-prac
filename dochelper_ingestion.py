@@ -95,8 +95,6 @@ async def index_documents_async(documents : List[Document], batch_size: int = 50
         )
     
 
-    print("Done")
-
 async def main():
     """Main async function to orchestarates the entire process"""
     log_header("DOCUMENTAION INGESTION PIPELINE")
@@ -116,7 +114,7 @@ async def main():
     )
 
     all_docs = res['results'] # lsit of dictionaries containing keuys as url and  raw_content of url fetched
-    all_docs = [result for result in res['results']]
+    # all_docs = [result for result in res['results']] #
     all_docs = [Document(page_content=result['raw_content'], metadata= {"source":result['url']}) for result in res['results'] ]
     # first we fetch the raw data from each url and then convert it into Document object and the url from where it is etched as metadata. This clearly informs where the data was fetched from
     log_success(f"TavilyCrawl: Successfully ceawked {len(all_docs)} urls from documentation site")
@@ -124,7 +122,7 @@ async def main():
      # Split documents into chunks
     log_header("DOCUMENT CHUNKING PHASE")
     log_info(
-        f"✂️  Text Splitter: Processing {len(all_docs)} documents with 4000 chunk size and 200 overlap",
+        f"✂️  Text Splitter: Processing {len(all_docs)} documents with 1000 chunk size and 200 overlap",
         Colors.YELLOW,
     )
 

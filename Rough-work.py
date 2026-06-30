@@ -4,8 +4,8 @@ from langchain.messages import HumanMessage
 from langchain_ollama import ChatOllama
 from langchain_tavily import TavilySearch
 
-from llm_main import AgentResponse
-
+from hello_world_llm_main import AgentResponse
+import re
 from operator import itemgetter
 
 def test():
@@ -247,4 +247,12 @@ def test_embedding_batch_documents():
 
     if __name__ == "__main__":
         asyncio.run(main())
+
+def regex():
+    output = "Action: Please go right and then go left"
+    action_match = re.search(r"Action:\s*(.+)", output)
+    tool_name = action_match.group(1).strip()
+    print(action_match,"\n-------------\n",tool_name)
+
+regex()
 
