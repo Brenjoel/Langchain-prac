@@ -1,0 +1,64 @@
+Introduction to
+Vector Databases
+
+Embeddings
+
+Vector stores (Pinecone)
+
+RetrievalQA Chain
+
+LangChain document loaders
+
+LangChain text splitters
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Create an index in Pinecone
+go to Indexes > give the name of the index (Default/<index_name>) default will laready given in the name bar
+For custom settings ( recommended)
+1. click custom settings check box3. 
+2. Select vector type = dense and Metric = cosine 
+For publicly available settings
+1. select text-embedding-3-small
+
+Create
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Document Loader:
+To get different document loaders go to langchain repository > lancgahin > document_loaders > 
+there are document providers for text , whatsapp and many more
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Text splitters:
+used to split text so that we dont get token limt reached exception
+there are different statergies used ti split the text based on the LLM we use and the use case
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+embedding models:
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Vector stores:
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+In langchain , if we add a python functions(which are not runnable and does not have invoke function),
+then the langchain automatically converts them into runnable lambda functions
+ex: retriever | formatdocs | prompt_template is converted into
+    retriever | RunnableLambda(formatdocs) | prompt_template
+
+by default the outputs from format_docs  (context and query)  are not sent to the prompt_template directly
+
+prompt_template needs question and context 
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Pinecone vector store indexes the documents over cloud,
+if need to index locally then Chroma helps
+from langchain_chroma import Chroma
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+import ssl 
+this helps for transprt layer security.
+When data is passed through api the the data trasfered is encrypted and only the destination files can decrypt the data sent
+
+import certifi
+certifi is a Python package that provides a collection of trusted SSL/TLS root certificates.
+certifi tells Python which certificate issuers it should trust.
