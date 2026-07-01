@@ -138,7 +138,7 @@ def run_agent(question: str):
             print("-"*60)
             print(f" [Parsed] Final Answer: {final_answer}")
             print("-"*60)
-            # return final_answer
+            return final_answer
         
         print(f" [Parsing] Looking for Action and Action input in LLM output...")
 

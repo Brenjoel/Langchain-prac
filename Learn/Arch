@@ -1,0 +1,126 @@
+Hello world LLM chain
+    create a chain with prompt template and llm
+    invoke it to get a response
+
+    if you want you can add tools
+    tool
+        define a function with tool decorator
+    pass it to the llm
+    
+1. Agent Loop LLM Tool calling
+    Tool definitions
+        Tool1
+        Tool2
+    Agent Loop
+        initialize llm (Ex: init-chat_ model)
+        bind the list of tools to the llm defined
+
+        loop the invokation of llm with tools by passing messages(System and human) 
+        until final answer is returned
+        
+        if the llm selects a tool, invoke the tool Selected with respective args received 
+        append the message returned from tool to messages
+
+2. Agent with function calling
+    function definitions
+        Func1
+        Func2
+    Now the functions are converted into tools by using the JSON format supported by the llm used
+
+    Agent Loop
+    same as previous
+
+3. RAW ReAct prompt
+    function definitions
+        Func1
+        Func2
+    
+    create a variable that store a list with each element having a sting describing tool name , signature and description 
+    prepare a ReAct prompt  (Ex: hwchase17/react )
+    and pass respective variables
+
+    initialize a prompt by combining react prompt and question to invoke
+
+
+    Loop
+        > pass the prompt by adding scratchpad to the previous prompt
+        
+        > call the llm chat function and pass the required args
+            model , message ({role:role,content: fullprompt})
+            option {"stop":<when to stop>}
+                    (Ex: ['\nobservation] to stop at observation)
+
+        fetch final asnwer with the help of regex
+        if final answer exists:
+            return
+        
+        search for action and action input with regex
+        if any one is not found 
+            return
+        
+        tool name will be the first group in action
+        and tool input will be first group in action input
+
+        if the called tool is present call the tool with respective args 
+
+       update scratchpad with output and observation 
+
+4. RAG 
+    Ingestion
+        > Load text (TextLoader)
+        > split text
+        > embed text
+        > store files in vector store
+    Retrieval 
+        > Retrieval object
+        > Prompt Template
+        Implementaion 1: Retrieval without LCEL
+            > invoke retriever with query
+            > format the docs by joining all the retrieved documents into a single string
+            > format prompt Template with the context (formatted doc from prev step) and query 
+            > invoke llm with formated Template as message
+
+            return the response
+        Implementaion 2: With LCEL
+            > (gets querry as input from the call)
+            > create a chain with 
+                o Create a sub chain
+                    Querry | retriever | format docs 
+                    => this gives context which is passed through out the main chain
+                o prompt Template
+                o llm
+                o StrOutputParser
+            > return chain
+
+    Invoking
+        1. Invoke llm directly with querry
+        2. Invoke llm with Implementaion 1 with querry
+        3. Invoke llm with Implementaion 2 with querry
+
+5. Doc Helper
+    async flow
+    
+    Ingestion
+        > invoke tavily crawl and pull urls and context
+            ( give list of dictionaries with keys as url and content)
+        > convert it into document objects with page content = content from prev step and metadata (source as url)
+        > split the Documents (results in a list of Documents)
+
+
+        >index Documents
+            => Divide the documents_list into batches (each batch consists of small list of documents)
+            => loop through each batch and store it in the vector_store
+    core    
+        > Initialize llm, embedding, vector_store
+        >tool to receive context (receive data from vector_store and serialize it)
+        >run llm    
+            o prepare a system_prompt
+            o create an agent with tool above
+            o messages 
+            o invoke agent with messages and get the answer
+            o  get the artifacts from the tool and store them
+            o return the answer and the artifact list
+
+    main 
+        > create a streamlit interface and customize ui
+

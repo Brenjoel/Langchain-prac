@@ -1,0 +1,65 @@
+*tasks unpacks iterables ex: m = [1,2,3] print(*m) o/p = 1 2 
+-----------------------------------------------------------------------------------------
+Symentic cache and llm cache
+    Multiple calls are need to be made to the llm, which are sequencial which takes lot of time
+    for this Symentic cache or llm cache is used
+context window
+    lost in the middle problem
+hallucination
+    RAG is a good technique, 
+
+fine tuning
+
+pricing
+    making multiple calls to llm costs more than the work done 
+    o cache storage helps 
+    o RAG for tool selection 
+
+response validation
+
+Security
+    Guardrills
+    LLM guard 
+
+overkilling
+    try to use deterministic code before creating agents 
+
+Generative UI - copilotkit
+
+Langchain academy - langchain ecosystem
+
+open sources vs pricy llm
+
+-----------------------------------------------------------------------------------------
+LangGraph
+
+flow engineering
+
+-----------------------------------------------------------------------------------------
+
+
+CAIR - confidence in AI Results
+
+
+-----------------------------------------------------------------------------------------
+Asyncio = one thread managing many waiting tasks.
+Multithreading = multiple threads in one process sharing memory.
+Multiprocessing = multiple independent Python processes using multiple CPU cores.
+
+Which One Should You Use?
+Calling APIs / LLMs
+
+✅ Asyncio
+
+await llm.ainvoke(...)
+Downloading Files
+
+✅ Asyncio or Threads
+
+Training ML Models
+
+✅ Multiprocessing
+
+Image Processing
+
+✅ Multiprocessing

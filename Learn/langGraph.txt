@@ -1,0 +1,15 @@
+LangGraph
+    node > Python function
+    edges > connect nodes
+        conditional edges determine the flow
+    
+    state / agent state : dictionaries
+        o   stores info that needs to be tracked 
+            ( can be node execution results, temporary results, or even chat history )
+        o   Local to graph and available to every node and edge
+    
+    nodes(function) 
+        o always receive args as state as it needs to continue
+        o and returns dictionaries~
+
+

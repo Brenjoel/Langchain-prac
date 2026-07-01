@@ -1,0 +1,1939 @@
+Proj3
+    This is the **best of the three projects** from a learning perspective.
+
+    Why?
+
+    Because you are no longer relying on **LangChain** or **native function calling**. You're actually implementing a simplified version of how early AI agents (like the original ReAct agents) worked.
+
+    That said, **I still would not list this as a third resume project**. These three projects are really **three iterations of the same agent**, each showing increasing levels of abstraction:
+
+    1. **LangChain Tool Calling** (high-level abstraction)
+    2. **Native Ollama Function Calling** (mid-level abstraction)
+    3. **Custom ReAct Agent Framework** (low-level implementation)
+
+    That progression is very impressive when explained together.
+
+    ---
+
+    # Overall Assessment
+
+    ## Project Evolution
+
+    ```
+    Project 1
+    ↓
+    Using LangChain Agent APIs
+
+    Project 2
+    ↓
+    Using Native Function Calling APIs
+
+    Project 3
+    ↓
+    Building the Agent Loop Yourself
+    ```
+
+    This is exactly how experienced GenAI engineers learn.
+
+    ---
+
+    # What Makes Project 3 Different?
+
+    Unlike the previous projects:
+
+    * No `@tool`
+    * No `.bind_tools()`
+    * No JSON function schema
+    * No built-in tool calling
+
+    Instead, you implemented:
+
+    ```
+    LLM
+
+    ↓
+
+    Prompt Engineering
+
+    ↓
+
+    Regex Parsing
+
+    ↓
+
+    Python Execution
+
+    ↓
+
+    Scratchpad Update
+
+    ↓
+
+    Next LLM Call
+    ```
+
+    That's essentially a lightweight implementation of the **ReAct (Reason + Act)** pattern.
+
+    ---
+
+    # Resume Version
+
+    Don't make this a separate project. Instead, evolve Project 1 into something like:
+
+    **Custom LLM Agent Framework with LangChain, Native Function Calling, and ReAct**
+
+    * Developed an LLM-powered shopping assistant using three progressively lower-level agent implementations: LangChain Tool Calling, native Ollama Function Calling, and a custom ReAct-based execution engine.
+    * Built a custom ReAct agent loop that dynamically generated tool descriptions using Python introspection (`inspect`), parsed model outputs using regular expressions, executed Python functions, and maintained reasoning state through a scratchpad.
+    * Implemented deterministic business logic for pricing and discount calculation while preventing hallucinations through structured prompting and iterative tool execution.
+    * Compared framework-managed and manual agent orchestration approaches to understand tool schemas, message protocols, prompt engineering, and LLM reasoning workflows.
+    * Integrated LangSmith tracing for end-to-end debugging and observability of agent execution.
+
+    ---
+
+    # LinkedIn Version
+
+    To better understand how AI agents work internally, I implemented the same shopping assistant using three different approaches. I first used LangChain Tool Calling, then rebuilt it with native Ollama Function Calling, and finally implemented a custom ReAct agent without relying on any framework abstractions. The final version dynamically generated tool descriptions using Python introspection, parsed LLM reasoning steps with regular expressions, executed Python tools, and maintained a scratchpad across multiple reasoning iterations. This project gave me hands-on experience with the core mechanics behind modern AI agent frameworks.
+
+    ---
+
+    # Project Level
+
+    | Category                | Rating                                       |
+    | ----------------------- | -------------------------------------------- |
+    | Difficulty              | Advanced Learning / Intermediate Engineering |
+    | Python                  | ⭐⭐⭐⭐⭐                                        |
+    | Prompt Engineering      | ⭐⭐⭐⭐⭐                                        |
+    | Agent Internals         | ⭐⭐⭐⭐⭐                                        |
+    | Framework Understanding | ⭐⭐⭐⭐⭐                                        |
+    | Production Readiness    | ⭐⭐☆☆☆                                        |
+    | Resume Value            | ⭐⭐⭐⭐☆                                        |
+    | Interview Value         | ⭐⭐⭐⭐⭐                                        |
+
+    ---
+
+    # Things I Really Like
+
+    ## 1. Automatic Tool Discovery
+
+    This:
+
+    ```python
+    inspect.signature()
+    inspect.getdoc()
+    ```
+
+    is actually quite impressive.
+
+    Instead of writing
+
+    ```
+    Tool:
+
+    Price Tool
+
+    Arguments...
+    ```
+
+    You generated it automatically.
+
+    That is how frameworks work.
+
+    ---
+
+    ## 2. Scratchpad
+
+    ```
+    Thought
+
+    ↓
+
+    Action
+
+    ↓
+
+    Observation
+
+    ↓
+
+    Thought
+    ```
+
+    Excellent.
+
+    You now understand ReAct.
+
+    ---
+
+    ## 3. Regex Parser
+
+    Instead of
+
+    ```
+    tool_calls
+    ```
+
+    you parse
+
+    ```
+    Action:
+
+    Action Input:
+    ```
+
+    yourself.
+
+    Again,
+
+    that's what early agent frameworks did.
+
+    ---
+
+    ## 4. Dynamic Prompt
+
+    ```
+    tool_descriptions
+    ```
+
+    generated automatically.
+
+    Nice.
+
+    ---
+
+    ## 5. Agent Loop
+
+    You now have
+
+    ```
+    Prompt
+
+    ↓
+
+    LLM
+
+    ↓
+
+    Parse
+
+    ↓
+
+    Execute
+
+    ↓
+
+    Append Observation
+
+    ↓
+
+    Repeat
+    ```
+
+    Excellent understanding.
+
+    ---
+
+    # Weaknesses
+
+    Now let's be critical.
+
+    ---
+
+    ## Regex
+
+    This is fragile.
+
+    Example
+
+    Model writes
+
+    ```
+    Action :
+    ```
+
+    instead of
+
+    ```
+    Action:
+    ```
+
+    ↓
+
+    Parser breaks.
+
+    Production systems avoid regex-based parsing.
+
+    ---
+
+    ## No Structured Output
+
+    Better approaches:
+
+    OpenAI Function Calling
+
+    ↓
+
+    JSON Mode
+
+    ↓
+
+    Pydantic
+
+    ↓
+
+    Structured Output Parser
+
+    ---
+
+    ## Hallucinated Formatting
+
+    The LLM may produce
+
+    ```
+    Action Input
+
+    Laptop
+    ```
+
+    instead of
+
+    ```
+    product=laptop
+    ```
+
+    ↓
+
+    Agent crashes.
+
+    ---
+
+    ## No Recovery
+
+    If parser fails
+
+    ↓
+
+    Agent exits.
+
+    Production agents retry or repair malformed outputs.
+
+    ---
+
+    ## No Type Checking
+
+    Everything becomes
+
+    ```
+    str
+    ```
+
+    Need validation.
+
+    ---
+
+    ## No Parallel Tool Calls
+
+    Only
+
+    ```
+    one tool
+    ```
+
+    per iteration.
+
+    ---
+
+    # Enhancements
+
+    Now things get interesting.
+
+    ---
+
+    ## Replace Regex
+
+    Use
+
+    Structured JSON
+
+    instead.
+
+    ```
+    {
+    action
+
+    arguments
+    }
+    ```
+
+    Far more reliable.
+
+    ---
+
+    ## Build a Generic ReAct Framework
+
+    Instead of
+
+    ```
+    Shopping
+    ```
+
+    Support
+
+    ```
+    Calculator
+
+    Weather
+
+    Search
+
+    Wikipedia
+
+    SQL
+
+    Files
+    ```
+
+    Now you have your own agent framework.
+
+    ---
+
+    ## Tool Registry
+
+    Instead of
+
+    ```
+    tools_dict
+    ```
+
+    make
+
+    ```python
+    register_tool()
+    ```
+
+    Now plugins become possible.
+
+    ---
+
+    ## Streaming
+
+    Parse tokens while generating.
+
+    ---
+
+    ## Retry Parser
+
+    If parser fails
+
+    ↓
+
+    Ask LLM
+
+    ```
+    Return valid format.
+    ```
+
+    ---
+
+    ## Self-Correction
+
+    Modern agents do
+
+    ```
+    LLM
+
+    ↓
+
+    Tool failed
+
+    ↓
+
+    Reflect
+
+    ↓
+
+    Retry
+    ```
+
+    ---
+
+    ## Multi-Agent
+
+    Planner
+
+    ↓
+
+    Executor
+
+    ↓
+
+    Verifier
+
+    ---
+
+    ## LangGraph Version
+
+    Rebuild this
+
+    using
+
+    StateGraph.
+
+    Very impressive.
+
+    ---
+
+    # Interview Questions
+
+    Expect these:
+
+    ---
+
+    ### What is ReAct?
+
+    Reason + Act
+
+    Instead of directly answering
+
+    ↓
+
+    Reason
+
+    ↓
+
+    Call tool
+
+    ↓
+
+    Observe
+
+    ↓
+
+    Reason
+
+    ↓
+
+    Answer
+
+    ---
+
+    ### Why Scratchpad?
+
+    Maintains reasoning history.
+
+    Without it
+
+    LLM forgets previous steps.
+
+    ---
+
+    ### Why inspect?
+
+    Automatically extracts
+
+    ```
+    Function Name
+
+    Parameters
+
+    Docstring
+    ```
+
+    No manual schema.
+
+    ---
+
+    ### Why regex?
+
+    Simple parser.
+
+    Not production ready.
+
+    ---
+
+    ### Why not JSON?
+
+    Better
+
+    More robust
+
+    Less hallucination.
+
+    Know this.
+
+    ---
+
+    ### Difference
+
+    Function Calling
+
+    vs
+
+    ReAct
+
+    This is commonly asked.
+
+    You should know:
+
+    | Function Calling | ReAct             |
+    | ---------------- | ----------------- |
+    | Structured       | Prompt-based      |
+    | Reliable         | Flexible          |
+    | JSON             | Natural language  |
+    | SDK support      | Any LLM           |
+    | Easier           | More customizable |
+
+    ---
+
+    # Resume Impact
+
+    Current
+
+    ⭐⭐⭐⭐☆
+
+    Good.
+
+    ---
+
+    After improvements
+
+    ⭐⭐⭐⭐⭐
+
+    Especially if
+
+    ```
+    Generic Agent Framework
+    ```
+
+    instead of
+
+    ```
+    Shopping Assistant.
+    ```
+
+    ---
+
+    # What You Should Know
+
+    Be comfortable explaining:
+
+    * The ReAct prompting pattern and why it alternates between reasoning and actions.
+    * How the scratchpad preserves context across multiple reasoning iterations.
+    * Why `inspect.signature()` and `inspect.getdoc()` enable automatic tool description generation.
+    * The limitations of regex-based parsing and why structured outputs (JSON/function calling) are preferred in production.
+    * Trade-offs between framework-based agents and fully custom implementations.
+
+    ---
+
+    # If I Were Hiring
+
+    This project demonstrates curiosity and depth. Many candidates can use LangChain APIs, but far fewer can explain or implement the mechanics behind them.
+
+    However, from an engineering perspective, this is still a **learning framework**, not a production application. I would be impressed by your understanding of agent internals, but I would still want to see a larger project that applies these concepts to a real-world problem.
+
+    # Final Recommendation: Combine Projects 1–3
+
+    I would **not** list these as three separate resume projects. Instead, present them as a single flagship project with clear progression:
+
+    > **Custom LLM Agent Framework: LangChain → Native Function Calling → ReAct**
+
+    Then explain that you implemented the same agent at three abstraction levels to understand modern LLM agent architectures.
+
+    ## Overall Rating of the Combined Project
+
+    | Aspect                 | Rating |
+    | ---------------------- | -----: |
+    | Python                 |  ⭐⭐⭐⭐⭐ |
+    | LangChain              |  ⭐⭐⭐⭐⭐ |
+    | LLM Fundamentals       |  ⭐⭐⭐⭐⭐ |
+    | Agent Architecture     |  ⭐⭐⭐⭐⭐ |
+    | Prompt Engineering     |  ⭐⭐⭐⭐⭐ |
+    | Production Engineering |  ⭐⭐☆☆☆ |
+    | Interview Readiness    |  ⭐⭐⭐⭐⭐ |
+    | Resume Strength        |  ⭐⭐⭐⭐☆ |
+
+    ### My suggestion for your portfolio
+
+    Since I know you're aiming for **GenAI/LLM Engineer** roles, I'd keep this combined project as your **"LLM Agent Internals"** project and build additional complementary projects such as:
+
+    1. **Production RAG System** (LangChain + Pinecone + FastAPI + Streamlit/React)
+    2. **LangGraph Multi-Agent Workflow**
+    3. **MCP-based AI Assistant** with multiple external tools
+    4. **LLM Evaluation & Observability Pipeline** using LangSmith
+
+    That combination would give you a portfolio that demonstrates both **deep understanding of AI agent internals** and **real-world production engineering skills**, which is exactly what many GenAI roles look for today.
+
+Proj-RAG
+    This is **significantly more valuable** than Projects 1–3 from a resume perspective.
+
+    The first three projects teach **how agents work**.
+
+    This project teaches **how modern LLM applications are actually built**.
+
+    If I were hiring a GenAI Engineer, I'd be **more interested in this project** than the first three combined because it demonstrates skills used in production systems.
+
+    ---
+
+    # My Overall Rating
+
+    | Category             | Rating       |
+    | -------------------- | ------------ |
+    | Difficulty           | Intermediate |
+    | Resume Value         | ⭐⭐⭐⭐⭐        |
+    | LinkedIn Value       | ⭐⭐⭐⭐⭐        |
+    | Interview Value      | ⭐⭐⭐⭐⭐        |
+    | Industry Relevance   | ⭐⭐⭐⭐⭐        |
+    | Production Readiness | ⭐⭐⭐☆☆        |
+
+    ---
+
+    # What This Project Actually Is
+
+    This is not just a "RAG project."
+
+    It demonstrates several concepts:
+
+    * Document ingestion
+    * Chunking
+    * Embedding generation
+    * Vector database indexing
+    * Semantic retrieval
+    * Prompt engineering
+    * LLM inference
+    * LCEL pipelines
+    * Comparison of manual orchestration vs declarative pipelines
+
+    That's a lot more than most beginner RAG projects.
+
+    ---
+
+    # What Recruiters Will Think
+
+    Instead of
+
+    > "He built a chatbot."
+
+    they'll think
+
+    > "He understands the complete Retrieval-Augmented Generation pipeline."
+
+    That's exactly what GenAI teams look for.
+
+    ---
+
+    # Resume Project Title
+
+    I'd call it:
+
+    > **Retrieval-Augmented Generation (RAG) System using LangChain, Pinecone & Ollama**
+
+    or
+
+    > **Document Question Answering System using LangChain and Pinecone**
+
+    or
+
+    > **Local RAG Pipeline using Ollama, Pinecone and LCEL**
+
+    ---
+
+    # Resume Description
+
+    **Retrieval-Augmented Generation (RAG) System using LangChain, Pinecone & Ollama**
+
+    * Developed an end-to-end Retrieval-Augmented Generation (RAG) pipeline for document-based question answering using LangChain, Pinecone, Ollama, and local embedding models.
+    * Built a document ingestion pipeline that loaded text documents, performed chunking, generated embeddings using `nomic-embed-text`, and indexed vectors into Pinecone for semantic search.
+    * Implemented semantic retrieval using Pinecone retrievers and compared manual retrieval workflows with LangChain Expression Language (LCEL) pipelines for improved composability, streaming, and asynchronous execution.
+    * Designed prompt templates to combine retrieved context with user queries, reducing hallucinations and improving answer relevance.
+    * Evaluated multiple retrieval approaches, including direct LLM responses, manual RAG orchestration, and LCEL-based pipelines to understand trade-offs in modularity and scalability.
+
+    ---
+
+    # LinkedIn Version
+
+    Built a complete Retrieval-Augmented Generation (RAG) application using LangChain, Pinecone, Ollama, and local embedding models. The project includes document ingestion, text chunking, embedding generation, semantic vector search, and context-aware response generation. I also compared multiple implementation styles, including manual retrieval pipelines and LangChain Expression Language (LCEL), to understand how modern RAG systems can be composed for better scalability, streaming, and asynchronous execution. This project strengthened my understanding of vector databases, semantic search, prompt engineering, and end-to-end LLM application development.
+
+    ---
+
+    # Strengths
+
+    This project demonstrates knowledge of:
+
+    ✅ LangChain
+
+    ✅ Pinecone
+
+    ✅ Embeddings
+
+    ✅ Vector Search
+
+    ✅ Retrieval
+
+    ✅ Chunking
+
+    ✅ Prompt Engineering
+
+    ✅ LCEL
+
+    ✅ Local LLMs
+
+    ✅ Local Embeddings
+
+    These are the exact technologies appearing in many GenAI job descriptions.
+
+    ---
+
+    # What I Like Most
+
+    ## 1. You Compared Three Approaches
+
+    Instead of only writing
+
+    ```python
+    chain.invoke()
+    ```
+
+    you implemented:
+
+    ```
+    Raw LLM
+
+    ↓
+
+    Manual Retrieval
+
+    ↓
+
+    LCEL
+    ```
+
+    That shows you wanted to understand *why* LCEL exists, not just use it.
+
+    ---
+
+    ## 2. Local Models
+
+    Using
+
+    ```
+    Ollama
+
+    +
+
+    nomic-embed-text
+    ```
+
+    is a good choice.
+
+    Many candidates only know OpenAI APIs.
+
+    You understand open-source models.
+
+    ---
+
+    ## 3. Pinecone
+
+    Huge plus.
+
+    Most companies use
+
+    * Pinecone
+    * Weaviate
+    * Qdrant
+    * Milvus
+
+    Knowing one vector DB transfers well to others.
+
+    ---
+
+    ## 4. LCEL
+
+    LCEL is becoming standard in modern LangChain.
+
+    Many beginners still build everything manually.
+
+    ---
+
+    # Weaknesses
+
+    Now I'll critique it as a hiring manager.
+
+    ---
+
+    ## Single File
+
+    Everything lives in one script.
+
+    Better:
+
+    ```
+    rag/
+
+    ingest.py
+
+    retrieve.py
+
+    embeddings.py
+
+    vectorstore.py
+
+    prompts.py
+
+    app.py
+    ```
+
+    ---
+
+    ## One Document
+
+    You only ingest
+
+    ```
+    Medium_blog.txt
+    ```
+
+    Production systems ingest
+
+    * PDFs
+    * DOCX
+    * HTML
+    * Websites
+    * Confluence
+    * SharePoint
+    * GitHub
+    * Multiple files
+
+    ---
+
+    ## No Metadata
+
+    Chunks should contain metadata like:
+
+    ```
+    source
+
+    page
+
+    title
+
+    chunk_id
+    ```
+
+    This enables citations and filtering.
+
+    ---
+
+    ## No Retrieval Evaluation
+
+    You retrieve
+
+    ```
+    k = 3
+    ```
+
+    But why 3?
+
+    Compare:
+
+    * k=3
+    * k=5
+    * k=10
+
+    Evaluate precision and recall.
+
+    ---
+
+    ## No Hybrid Search
+
+    Only vector search.
+
+    Modern systems often use:
+
+    ```
+    BM25
+
+    +
+
+    Vector Search
+    ```
+
+    ---
+
+    ## No Reranking
+
+    After retrieval
+
+    ↓
+
+    Rerank
+
+    ↓
+
+    Send to LLM
+
+    ---
+
+    ## No Source Citations
+
+    Users should know:
+
+    ```
+    Answer
+
+    ↓
+
+    Source
+
+    ↓
+
+    Chunk
+    ```
+
+    ---
+
+    ## No Streaming
+
+    LCEL supports streaming.
+
+    You're not using it.
+
+    ---
+
+    # Enhancements
+
+    ## Beginner
+
+    * Support PDF loading
+    * Multiple files
+    * Better chunk overlap
+    * Metadata
+    * CLI interface
+
+    ---
+
+    ## Intermediate
+
+    * FastAPI
+    * Streamlit
+    * React frontend
+    * Multiple embedding models
+    * Multiple vector stores
+    * Configurable chunk size
+
+    ---
+
+    ## Advanced
+
+    Now this becomes a portfolio centerpiece.
+
+    ### Hybrid Search
+
+    ```
+    BM25
+
+    +
+
+    Dense Retrieval
+    ```
+
+    ---
+
+    ### Parent Document Retriever
+
+    Instead of retrieving chunks.
+
+    ---
+
+    ### Multi Query Retrieval
+
+    Generate multiple search queries.
+
+    ---
+
+    ### Contextual Compression
+
+    Compress retrieved documents before passing them to the LLM.
+
+    ---
+
+    ### Reranker
+
+    Use:
+
+    * BGE Reranker
+    * Cohere Rerank
+    * Cross Encoder
+
+    ---
+
+    ### LangSmith Evaluation
+
+    Evaluate:
+
+    * Faithfulness
+    * Relevance
+    * Answer correctness
+
+    ---
+
+    ### LLM-as-a-Judge
+
+    Automatically evaluate generated responses.
+
+    ---
+
+    ### Agentic RAG
+
+    Instead of:
+
+    ```
+    Retrieve
+
+    ↓
+
+    Answer
+    ```
+
+    Do:
+
+    ```
+    Planner
+
+    ↓
+
+    Retriever
+
+    ↓
+
+    Verifier
+
+    ↓
+
+    Answer
+    ```
+
+    ---
+
+    ### MCP
+
+    Replace hardcoded retrieval with MCP tools.
+
+    ---
+
+    ### Docker
+
+    Containerize.
+
+    ---
+
+    ### Kubernetes
+
+    Deploy.
+
+    ---
+
+    ### CI/CD
+
+    GitHub Actions.
+
+    ---
+
+    # Interview Questions
+
+    You should know:
+
+    ---
+
+    ### Why RAG?
+
+    To reduce hallucinations and provide the LLM with relevant external knowledge.
+
+    ---
+
+    ### Why Pinecone?
+
+    Fast approximate nearest-neighbor search and scalable vector storage.
+
+    ---
+
+    ### Why chunking?
+
+    Models have context limits, and embeddings work better on smaller semantic units.
+
+    ---
+
+    ### Why `nomic-embed-text`?
+
+    It's a local embedding model suitable for semantic retrieval without relying on external APIs.
+
+    ---
+
+    ### Why embeddings?
+
+    To convert text into numerical vectors that capture semantic meaning.
+
+    ---
+
+    ### Why LCEL?
+
+    It offers composability, built-in streaming, async support, batching, and cleaner pipeline definitions.
+
+    ---
+
+    ### Difference
+
+    Retriever
+
+    vs
+
+    Vector Store
+
+    Know this.
+
+    ---
+
+    ### Difference
+
+    Embedding Model
+
+    vs
+
+    LLM
+
+    Know this.
+
+    ---
+
+    ### Difference
+
+    Similarity Search
+
+    vs
+
+    MMR
+
+    Know this.
+
+    ---
+
+    # What You Should Know Deeply
+
+    Be prepared to explain:
+
+    * How embeddings represent semantic similarity.
+    * Why chunk size and overlap affect retrieval quality.
+    * How `PineconeVectorStore.from_documents()` handles embedding generation and indexing.
+    * Why retrieval improves factual grounding compared to prompting an LLM directly.
+    * The differences between manual retrieval orchestration and LCEL-based pipelines.
+
+    These are common interview topics.
+
+    ---
+
+    # If I Were Hiring
+
+    This is the **first project** you've shown that I would definitely expect to see on a GenAI engineer's resume.
+
+    It demonstrates practical experience with the core building blocks of modern LLM applications and has a clear path toward production readiness with additional features.
+
+    # My Recommendation So Far
+
+    Based on the projects you've shared, here's how I would rank them for your resume:
+
+    | Rank | Project                                                           | Resume?                   | Rating |
+    | ---- | ----------------------------------------------------------------- | ------------------------- | ------ |
+    | 🥇 1 | **Project 4 – RAG System (LangChain + Pinecone + Ollama + LCEL)** | ✅ **Definitely**          | ⭐⭐⭐⭐⭐  |
+    | 🥈 2 | **Projects 1–3 Combined – Custom LLM Agent Framework**            | ✅ **Definitely**          | ⭐⭐⭐⭐☆  |
+    | 🥉 3 | Project 2 alone                                                   | ❌ Merge into Projects 1–3 | —      |
+    | 4    | Project 1 alone                                                   | ❌ Merge into Projects 1–3 | —      |
+    | 5    | Project 3 alone                                                   | ❌ Merge into Projects 1–3 | —      |
+
+    ## One Important Suggestion
+
+    Your current RAG project is already good, but it can become **excellent** with relatively modest effort. If you evolve it into a complete application with:
+
+    * **FastAPI** backend
+    * **Streamlit or React** frontend
+    * **Support for PDF, DOCX, and web pages**
+    * **Conversation memory**
+    * **Source citations**
+    * **Streaming responses**
+    * **Docker deployment**
+
+    then it becomes the kind of flagship project that can anchor your resume for GenAI and AI engineering roles. Given your existing Azure experience and ongoing LangChain work, I would prioritize enhancing this project before starting another unrelated one.
+
+Proj - doc
+    This is the first project you've shown that I would call a **real portfolio project** rather than a learning exercise.
+
+    Compared to Projects 1–4, this is a significant step up because it solves an actual problem and demonstrates an end-to-end architecture.
+
+    If I were interviewing you for a GenAI Engineer role, this is the project I'd spend the most time discussing.
+
+    ---
+
+    # Overall Rating
+
+    | Category             | Rating   |
+    | -------------------- | -------- |
+    | Difficulty           | Advanced |
+    | Resume Value         | ⭐⭐⭐⭐⭐    |
+    | LinkedIn Value       | ⭐⭐⭐⭐⭐    |
+    | Interview Value      | ⭐⭐⭐⭐⭐    |
+    | Industry Relevance   | ⭐⭐⭐⭐⭐    |
+    | Production Readiness | ⭐⭐⭐⭐☆    |
+    | Architecture         | ⭐⭐⭐⭐⭐    |
+
+    ---
+
+    # What This Project Actually Is
+
+    This is **not just a RAG project**.
+
+    It includes multiple production concepts.
+
+    ```
+    Documentation Website
+
+    ↓
+
+    Tavily Crawl
+
+    ↓
+
+    Recursive Chunking
+
+    ↓
+
+    Embeddings
+
+    ↓
+
+    Pinecone / Chroma
+
+    ↓
+
+    Retriever Tool
+
+    ↓
+
+    LLM Agent
+
+    ↓
+
+    Streamlit Chat UI
+    ```
+
+    That is a complete GenAI application.
+
+    ---
+
+    # What Skills This Demonstrates
+
+    This one project demonstrates:
+
+    ✅ LangChain
+
+    ✅ Agentic RAG
+
+    ✅ Tool Calling
+
+    ✅ Pinecone
+
+    ✅ Chroma
+
+    ✅ Ollama
+
+    ✅ Local Embeddings
+
+    ✅ Async Programming
+
+    ✅ Streamlit
+
+    ✅ Vector Databases
+
+    ✅ Web Crawling
+
+    ✅ Recursive Chunking
+
+    ✅ Document Processing
+
+    ✅ Tool Artifacts
+
+    ✅ Source Attribution
+
+    ✅ Modular Architecture
+
+    ✅ Prompt Engineering
+
+    This is an impressive combination.
+
+    ---
+
+    # Resume Project Title
+
+    I would rename it.
+
+    Instead of
+
+    ```
+    LangChain Documentation Helper
+    ```
+
+    I'd write
+
+    > **Agentic RAG System for LangChain Documentation**
+
+    or
+
+    > **AI Documentation Assistant using LangChain, Pinecone & Ollama**
+
+    or
+
+    > **Documentation Q&A Assistant using Agentic Retrieval**
+
+    Those titles sound much stronger.
+
+    ---
+
+    # Resume Version
+
+    **Agentic RAG Documentation Assistant using LangChain, Pinecone, Ollama & Streamlit**
+
+    * Designed and developed an end-to-end Retrieval-Augmented Generation (RAG) application that answers questions about LangChain documentation using agentic retrieval and semantic search.
+    * Built an asynchronous ingestion pipeline that crawled official documentation with Tavily, recursively chunked content, generated embeddings using `nomic-embed-text`, and indexed documents into Pinecone and Chroma vector databases.
+    * Implemented a retrieval tool integrated with LangChain Agents, enabling the LLM to retrieve relevant documentation before generating grounded responses with source attribution.
+    * Developed a modular architecture separating ingestion, retrieval, agent orchestration, and frontend components, improving maintainability and extensibility.
+    * Created a Streamlit chat interface supporting conversational queries, source references, and session management for an interactive documentation assistant.
+
+    ---
+
+    # LinkedIn Version
+
+    Built an end-to-end Agentic Retrieval-Augmented Generation (RAG) system for answering questions about LangChain documentation. The application automatically crawls official documentation using Tavily, performs recursive document chunking, generates embeddings with local models, and stores semantic vectors in Pinecone and Chroma. A LangChain Agent retrieves relevant context before generating responses, ensuring grounded answers with source attribution. The system includes asynchronous document ingestion, modular backend components, and a Streamlit-based conversational interface. Through this project, I gained hands-on experience building production-style GenAI applications involving vector databases, retrieval pipelines, AI agents, and local LLM deployment.
+
+    ---
+
+    # What I Like
+
+    ## 1. Async Ingestion
+
+    This is much better than
+
+    ```python
+    for doc in docs:
+        vector_store.add_documents(...)
+    ```
+
+    Instead
+
+    ```python
+    asyncio.gather(...)
+    ```
+
+    Good.
+
+    Recruiters like async.
+
+    ---
+
+    ## 2. Modular Architecture
+
+    You separated
+
+    ```
+    ingestion.py
+
+    ↓
+
+    core.py
+
+    ↓
+
+    frontend.py
+    ```
+
+    Excellent.
+
+    That looks like a real project.
+
+    ---
+
+    ## 3. Agentic Retrieval
+
+    Most RAG projects do
+
+    ```
+    Retriever
+
+    ↓
+
+    LLM
+    ```
+
+    You did
+
+    ```
+    Agent
+
+    ↓
+
+    Retriever Tool
+
+    ↓
+
+    LLM
+    ```
+
+    That is much closer to current GenAI applications.
+
+    ---
+
+    ## 4. Tool Artifacts
+
+    This impressed me.
+
+    ```python
+    ToolMessage.artifact
+    ```
+
+    Many people don't know this feature.
+
+    ---
+
+    ## 5. Source Attribution
+
+    Huge plus.
+
+    ```
+    Answer
+
+    ↓
+
+    Sources
+    ```
+
+    Companies want this.
+
+    ---
+
+    ## 6. Web Crawling
+
+    Instead of
+
+    ```
+    PDF
+    ```
+
+    You built
+
+    ```
+    Crawler
+
+    ↓
+
+    Documentation
+
+    ↓
+
+    Knowledge Base
+    ```
+
+    That's much more realistic.
+
+    ---
+
+    ## 7. Local Models
+
+    Again,
+
+    ```
+    Ollama
+
+    +
+
+    Nomic
+    ```
+
+    Good choice.
+
+    ---
+
+    # Things I'd Improve
+
+    Now I'm going to review it like a Senior AI Engineer.
+
+    ---
+
+    # 1 Metadata
+
+    Current
+
+    ```python
+    metadata={
+    "source":url
+    }
+    ```
+
+    I'd add
+
+    ```python
+    metadata={
+    "url":...,
+
+    "title":...,
+
+    "chunk":...,
+
+    "section":...,
+
+    "crawl_time":...
+    }
+    ```
+
+    ---
+
+    # 2 Incremental Crawling
+
+    Current
+
+    Every run
+
+    ↓
+
+    crawl everything.
+
+    Better
+
+    ```
+    Only crawl changed pages.
+    ```
+
+    ---
+
+    # 3 Duplicate Detection
+
+    Some pages repeat.
+
+    Need
+
+    ```
+    Hash
+
+    ↓
+
+    Skip duplicate
+    ```
+
+    ---
+
+    # 4 Hybrid Search
+
+    Current
+
+    Dense Retrieval
+
+    ↓
+
+    Pinecone
+
+    Better
+
+    ```
+    BM25
+
+    +
+
+    Dense Retrieval
+    ```
+
+    ---
+
+    # 5 Reranker
+
+    Very important.
+
+    Pipeline
+
+    ```
+    Retriever
+
+    ↓
+
+    Reranker
+
+    ↓
+
+    LLM
+    ```
+
+    ---
+
+    # 6 Streaming
+
+    Instead of waiting
+
+    ```
+    Spinner
+
+    ↓
+
+    Answer
+    ```
+
+    Stream tokens.
+
+    ---
+
+    # 7 Conversation Memory
+
+    Current
+
+    Every question independent.
+
+    Need
+
+    ```
+    Memory
+
+    ↓
+
+    Follow-up questions
+    ```
+
+    ---
+
+    # 8 Evaluation
+
+    Evaluate
+
+    * Faithfulness
+    * Precision
+    * Recall
+    * Groundedness
+
+    using LangSmith.
+
+    ---
+
+    # 9 Multi-Agent
+
+    One agent
+
+    ↓
+
+    Planner
+
+    ↓
+
+    Retriever
+
+    ↓
+
+    Verifier
+
+    ↓
+
+    Answer
+
+    ---
+
+    # 10 Docker
+
+    Containerize.
+
+    ---
+
+    # 11 FastAPI
+
+    Separate backend.
+
+    ---
+
+    # 12 Authentication
+
+    If deployed.
+
+    ---
+
+    # Interview Questions
+
+    Know these well.
+
+    ---
+
+    ## Why RecursiveCharacterTextSplitter?
+
+    Why not CharacterTextSplitter?
+
+    This is almost guaranteed.
+
+    ---
+
+    ## Why Pinecone?
+
+    Advantages
+
+    vs
+
+    Chroma.
+
+    ---
+
+    ## Why Chroma?
+
+    Advantages
+
+    vs
+
+    Pinecone.
+
+    ---
+
+    ## Why Tavily?
+
+    Instead of
+
+    BeautifulSoup
+
+    Scrapy
+
+    Firecrawl.
+
+    ---
+
+    ## Why Agentic RAG?
+
+    Instead of standard RAG.
+
+    ---
+
+    ## Why ToolMessage?
+
+    Why artifacts?
+
+    ---
+
+    ## Why Async?
+
+    Where does it help?
+
+    ---
+
+    ## Why Chunk Size
+
+    1000
+
+    Why overlap
+
+    200
+
+    ---
+
+    ## Why k=3?
+
+    How did you choose?
+
+    ---
+
+    ## Difference
+
+    Retriever
+
+    vs
+
+    VectorStore
+
+    ---
+
+    ## Difference
+
+    Embedding Model
+
+    vs
+
+    LLM
+
+    ---
+
+    ## Difference
+
+    Agent
+
+    vs
+
+    Chain
+
+    Know these.
+
+    ---
+
+    # What You Should Know Deeply
+
+    You should be able to explain:
+
+    * Why `RecursiveCharacterTextSplitter` generally preserves semantic boundaries better than fixed character splitting.
+    * The trade-offs between `Chroma` (local, simple) and `Pinecone` (managed, scalable).
+    * Why asynchronous indexing can improve ingestion throughput and what limitations remain.
+    * How LangChain `create_agent()` orchestrates tool execution under the hood.
+    * Why grounding responses with retrieved documents reduces hallucinations.
+    * The difference between ingestion-time processing (crawl → chunk → embed → index) and query-time processing (retrieve → generate).
+
+    ---
+
+    # If I Were Hiring
+
+    If I were hiring for:
+
+    * AI Engineer
+    * LLM Engineer
+    * GenAI Engineer
+    * Applied AI Engineer
+
+    This project would absolutely get my attention.
+
+    It's much closer to what companies are building than tutorial-style chatbots.
+
+    I'd ask you detailed questions about your design decisions, but the project itself would make me interested in interviewing you.
+
+    # Final Ranking of Your Projects
+
+    After reviewing all five, here's how I'd rank them:
+
+    | Rank | Project                                                | Resume                   | Rating |
+    | ---- | ------------------------------------------------------ | ------------------------ | ------ |
+    | 🥇 1 | **Project 5 – Agentic RAG Documentation Assistant**    | ✅ Must Include           | ⭐⭐⭐⭐⭐  |
+    | 🥈 2 | **Projects 1–3 Combined – Custom LLM Agent Framework** | ✅ Include                | ⭐⭐⭐⭐☆  |
+    | 🥉 3 | **Project 4 – Basic RAG Pipeline**                     | ❌ Replace with Project 5 | ⭐⭐⭐⭐☆  |
+
+    Project 5 is essentially the **evolved version of Project 4**. It demonstrates everything Project 4 does, plus:
+
+    * Automated web crawling
+    * Asynchronous ingestion
+    * Agent-based retrieval
+    * Modular architecture
+    * Streamlit UI
+    * Better separation of concerns
+    * Support for multiple vector stores
+
+    So you don't need both on your resume.
+
+    ## What I'd Put on Your Resume
+
+    Given your experience (TCS + Azure + GenAI learning), I'd recommend these flagship projects:
+
+    1. **Agentic RAG Documentation Assistant** (Project 5) ⭐⭐⭐⭐⭐
+    2. **Custom LLM Agent Framework (LangChain → Native Function Calling → ReAct)** (Projects 1–3 combined) ⭐⭐⭐⭐☆
+    3. **Azure ML Flight Delay Prediction Pipeline** (your end-to-end Azure ML SDK v2 project) ⭐⭐⭐⭐☆
+    4. **One additional advanced project** such as a LangGraph multi-agent workflow, MCP-based AI assistant, or an evaluation/observability platform.
+
+    That portfolio would demonstrate:
+
+    * Classical machine learning
+    * Cloud ML engineering
+    * LLM internals
+    * Production-style GenAI systems
+    * Modern AI application architecture
+
+    For someone with about **1.5 years of industry experience**, that's a strong and well-rounded set of projects for GenAI-focused roles.
+
+
+
