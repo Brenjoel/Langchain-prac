@@ -13,3 +13,21 @@ LangGraph
         o and returns dictionaries~
 
 
+State Graph:
+                __start__
+                    |
+                    | (solid)
+                    v
+             +---------------+
+             | agent_reason  |
+             +---------------+
+           .´       ^          `.
+         .´         | (solid)    `.
+(dotted) v          |             v (dotted)
+      +---------------+      +---------+
+      |      act      |      | __end__ |
+      +---------------+      +---------+
+
+
+LangGraph can have another graph as a node
+
