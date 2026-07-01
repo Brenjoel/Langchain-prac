@@ -31,3 +31,6 @@ State Graph:
 
 LangGraph can have another graph as a node
 
+-----------------------------------------------------------------------------------------------------------------------
+Reducer , Annotated
+

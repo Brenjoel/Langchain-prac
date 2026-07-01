@@ -34,7 +34,7 @@ app.get_graph().draw_mermaid_png(output_file_path="first_reAct_Flow.png")
 
 if __name__ == '__main__':
     # print("Hello ReAct LangGrapg with function calling")
-    query = "What is the temperature in hyderabad? display it and triple it "
+    query = "What is the temperature in Hyderabad? List the temperature and triple it "
     print("working...")
     res = app.invoke({"messages": [HumanMessage(content = query)]})
     print(res["messages"][LAST].content)
