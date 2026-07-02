@@ -19,15 +19,15 @@ GENERATE = "Generate"
 
 def generation_node(state : MessageGraph):
     ret =  {"messages": [generate_chain.invoke({"messages": state["messages"]})]}
-    print("-"*160,"\nGeneration Node: ", ret)
+    # print("-"*160,"\nGeneration Node: ", ret)
     return ret
 
 def reflection_node(state: MessageGraph):
-    print(state["messages"])
+    # print(state["messages"])
     res = reflection_chain.invoke({"messages": state["messages"]})
-    print("-"*160,"\nReflection res: ",res)
+    # print("-"*160,"\nReflection res: ",res)
     ret = {"messages": [HumanMessage(content=res.content)]}
-    print("-"*160,"\nReflection node: ",ret)
+    # print("-"*160,"\nReflection node: ",ret)
     return ret
 
 def should_continue(state: MessageGraph):
