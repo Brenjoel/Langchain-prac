@@ -3,9 +3,10 @@ load_dotenv()
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import WebBaseLoader
-from langchain_community.vectorstores import Chroma
+# from langchain_community.vectorstores import Chroma
 from langchain_pinecone import PineconeEmbeddings
 from langchain_ollama import OllamaEmbeddings
+from langchain_chroma import Chroma
 
 urls = [
     "https://lilianweng.github.io/posts/2023-06-23-agent/",
@@ -19,17 +20,18 @@ doc_list = [item for sublist in docs for item in sublist]
 text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size = 250, chunk_overlap=0)
 doc_splits = text_splitter.split_documents(doc_list)
 
-# Index only once
+# print("Index only once")
 # vectorstore = Chroma.from_documents(
 #     documents=doc_splits,
 #     collection_name="RAG_Chroma",
-#     embedding=OllamaEmbeddings(model="nomic-text-embed"),
-#     persist_directory="./.chroma",
+#     embedding=OllamaEmbeddings(model="nomic-embed-text"),
+#     persist_directory="./chroma_vectordb",
 
 # )
+# print(vectorstore._collection.count())
 
 retriever = Chroma(
-    collection_name="RAG_Chroma"
+    collection_name="RAG_Chroma",
+    embedding_function=OllamaEmbeddings(model="nomic-embed-text"),
+    persist_directory="./chroma_vectordb",
 ).as_retriever()
-
-pass
