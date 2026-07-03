@@ -1,0 +1,1 @@
+install beautifulsoup4 as this helps in installing langchain modules from web
