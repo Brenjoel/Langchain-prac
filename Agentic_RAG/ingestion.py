@@ -35,3 +35,7 @@ retriever = Chroma(
     embedding_function=OllamaEmbeddings(model="nomic-embed-text"),
     persist_directory="./chroma_vectordb",
 ).as_retriever()
+
+res = retriever.invoke(input="Agent memory")
+# print(res)
+# print("HI")
