@@ -219,3 +219,8 @@ __marimo__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Chroma DB
+chromadb
+chroma_vectordb
+.chroma

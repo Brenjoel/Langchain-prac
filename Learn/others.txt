@@ -1,1 +1,8 @@
 install beautifulsoup4 as this helps in installing langchain modules from web
+
+MCP _ Model Context Protocol
+    - Reduces manual integration code for all the external tools
+    - gives controlled access to 
+        > external tools
+        > Resources
+        > Prompt Templates and workflows

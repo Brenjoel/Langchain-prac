@@ -15,7 +15,7 @@ from langchain_groq import ChatGroq
 
 from Reflexion_AgentX_schema import AnswerQuestion, ReviseAnswer
 
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "qwen/qwen3-32b"
 llm = ChatGroq(model=MODEL)
 parser = JsonOutputToolsParser(return_id=True)
 parser_pydantic = PydanticToolsParser(tools=[AnswerQuestion])
