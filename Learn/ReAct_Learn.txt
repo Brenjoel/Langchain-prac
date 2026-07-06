@@ -51,6 +51,13 @@ chain.invoke({
 })
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Tools:
+    We can create custom tools or use pre-defined tools to bind to the llm, 
+    if we want the llm to use a particular tool for sure then we can give a parameter in bind tools
+    ex: llm.bind_tools(tools=[tool1,tool2], tool_choice=["tool1"])
+    this ensures that tool1 is used for sure 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 AI agent vs chain
 
 In AI agent, LLM decides what is the next step to be taken

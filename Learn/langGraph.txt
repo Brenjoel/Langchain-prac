@@ -14,23 +14,32 @@ LangGraph
 
 
 State Graph:
-                __start__
-                    |
-                    | (solid)
-                    v
-             +---------------+
-             | agent_reason  |
-             +---------------+
-           .´       ^          `.
-         .´         | (solid)    `.
-(dotted) v          |             v (dotted)
-      +---------------+      +---------+
-      |      act      |      | __end__ |
-      +---------------+      +---------+
-
+                  __start__
+                      |
+                      | (solid)
+                      v
+               +---------------+
+               | agent_reason  |
+               +---------------+
+             .´       ^          `.
+           .´         | (solid)    `.
+  (dotted) v          |             v (dotted)
+        +---------------+      +---------+
+        |      act      |      | __end__ |
+        +---------------+      +---------+
 
 LangGraph can have another graph as a node
 
 -----------------------------------------------------------------------------------------------------------------------
 Reducer , Annotated
+
+Tools Parsers
+JSONOutputParser, PydanticToolsParser, StrOutputParser
+
+JSONOutputParser
+which is simply going to return us the function call, we got back from the LLM and transform it into a dictionary.
+
+PydanticToolsParser
+which is going to take the response from the LLM,and search for the function-calling invocation,
+and it's going to parse it and transform it,into an AnswerQuestion(Class defined with BaseModel inherited ) object.
 

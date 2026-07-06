@@ -127,7 +127,7 @@ def various_llms():
     #     print(type(msg))
     #     print(msg)
 
-print("HELLO")
+# print("HELLO")
 def prompt():
     messages = [
         SystemMessage(
@@ -159,7 +159,7 @@ def item_getter():
 # item_getter()s
 from langchain_ollama import OllamaEmbeddings
 
-print(OllamaEmbeddings.model_fields.keys())
+# print(OllamaEmbeddings.model_fields.keys())
 
 def test_embedding_batch_documents():
     import os
@@ -254,5 +254,13 @@ def regex():
     tool_name = action_match.group(1).strip()
     print(action_match,"\n-------------\n",tool_name)
 
-regex()
+def groq():
+    from langchain_groq import ChatGroq
+    import os
 
+    llm = ChatGroq(
+        model="llama-3.3-70b-versatile",
+        api_key=os.environ["GROQ_API_KEY"],
+    )
+    print(llm.invoke("Hi").content)
+groq()
