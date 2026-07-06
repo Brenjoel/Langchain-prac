@@ -6,7 +6,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 from langchain_groq import ChatGroq
 
-MODEL="llama-3.3-70b-versatile"
+MODEL="qwen/qwen3-32b"
 
 llm = ChatGroq(temperature=0,model=MODEL,api_key=os.environ["GROQ_API_KEY"])
 

@@ -6,7 +6,7 @@ load_dotenv()
 import os
 # from graph.chains.retrieval_grader import llm
 
-MODEL="llama-3.3-70b-versatile"
+MODEL="qwen/qwen3-32b"
 
 llm = ChatGroq(temperature=0,model=MODEL,api_key=os.environ["GROQ_API_KEY"])
 
