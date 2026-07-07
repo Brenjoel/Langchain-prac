@@ -1,0 +1,26 @@
+Evaluation
+    routing accuracy;
+    retrieval precision;
+    retrieval recall;
+    answer relevance;
+    faithfulness;
+    web-search fallback rate;
+    average number of graph iterations;
+    latency;
+    token cost.
+
+You have multiple interview stories
+
+    You can discuss:
+
+    why basic RAG was insufficient;
+    why you moved to Agentic RAG;
+    why retrieval grading matters;
+    differences between function calling and ReAct;
+    why deterministic business logic belongs in tools;
+    why LangGraph is useful for cyclic workflows;
+    differences between Chroma and Pinecone;
+    local versus hosted models;
+    async ingestion.
+
+

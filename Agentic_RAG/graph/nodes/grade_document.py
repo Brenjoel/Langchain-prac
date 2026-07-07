@@ -21,7 +21,7 @@ def grade_document(state:GraphState) -> Dict[str,Any]:
     print("---Check Document Relevance to Question---")
     print("PRANK","-"*60,"\n",state.keys())
     question = state["question"]
-    documents = state["document"]
+    documents = state["documents"]
 
     filtered_docs = []
     web_search = False
