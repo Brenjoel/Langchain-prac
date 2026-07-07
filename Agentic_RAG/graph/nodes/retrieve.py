@@ -8,4 +8,4 @@ def retrieve(state: GraphState):
     question = state["question"]
     documents = retriever.invoke(question)
 
-    return {"document":documents, "question":question}
+    return {"documents":documents, "question":question}

@@ -26,7 +26,7 @@ def decide_to_generate(state:GraphState):
 def grade_generation_in_documents_questions(state : GraphState) -> str:
     print("---Check Hallucinations")
     question = state['question']
-    documents = state['document']
+    documents = state['documents']
     generation = state["generation"]
 
     score = hallucination_grader.invoke(
